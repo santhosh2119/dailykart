@@ -9,4 +9,6 @@ class Api {
   static const profileUpdate = baseUrl + "personaldataupdate";
   static const login = baseUrl + "login";
   static const home = baseUrl + "home";
+  static const resetpassword = baseUrl + "passwordotp";
+  static const updatepassword = baseUrl + "passwordupdate";
 }

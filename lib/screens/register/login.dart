@@ -1,6 +1,7 @@
 import 'package:daily_kart/providers/auth.dart';
 import 'package:daily_kart/screens/home/home.dart';
 import 'package:daily_kart/screens/register/phone_register.dart';
+import 'package:daily_kart/screens/register/reset_password.dart';
 import 'package:daily_kart/widgets/coustom_button.dart';
 import 'package:daily_kart/widgets/coustom_dialog.dart';
 import 'package:daily_kart/widgets/coustom_input_text_field.dart';
@@ -28,6 +29,13 @@ class _LoginState extends State<Login> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const PhoneRegister()),
+    );
+  }
+
+  _forgot_password(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ResetPassword()),
     );
   }
 
@@ -133,6 +141,11 @@ class _LoginState extends State<Login> {
                   CoustomTextButton(
                     onPressed: _register,
                     text: "Register",
+                  ),
+                  const CoustomSpace(),
+                  CoustomTextButton(
+                    onPressed: _forgot_password,
+                    text: "Forgot Password",
                   ),
                 ],
               ),

@@ -36,6 +36,28 @@ class Auth with ChangeNotifier {
     }
   }
 
+  Future reset_forgot_OTP(String mobileNumber) async {
+    final url = Uri.parse((Api.resetpassword));
+    try {
+      final response = await http.post(url, body: {
+        'mobile': mobileNumber,
+      });
+      var _userDetails = json.decode(response.body);
+
+      if (response.statusCode < 400) {
+        return [true, _userDetails];
+      } else {
+        return [false, _userDetails];
+      }
+    } catch (error) {
+      if (error.toString().contains("SocketException")) {
+        throw "Could not Verify OTP. Check your internet connection";
+      } else {
+        rethrow;
+      }
+    }
+  }
+
   Future loginIn(String phone, String password) async {
     final url = Uri.parse(Api.login);
     try {
@@ -63,11 +85,56 @@ class Auth with ChangeNotifier {
     }
   }
 
+  Future updatePassword(String userid, String password) async {
+    final url = Uri.parse(Api.updatepassword);
+    try {
+      final response = await http.post(url, body: {
+        "userid": userid,
+        "password": password,
+      });
+      final data = json.decode(response.body);
+      if (response.statusCode < 400) {
+        if (data["status"]) {
+          _userId = data["userid"];
+          return [true, data];
+        } else {
+          return [false, data];
+        }
+      } else {
+        return [false, data];
+      }
+    } catch (error) {
+      if (error.toString().contains("SocketException")) {
+        throw "Could not Verify OTP. Check your internet connection";
+      } else {
+        rethrow;
+      }
+    }
+  }
+
   Future verifyOtp(String mobileNumber, String otp) async {
     try {
       var url = Uri.parse(Api.checkOTP);
       final response =
           await http.post(url, body: {"mobile": mobileNumber, "otp": otp});
+      var _userDetails = json.decode(response.body);
+      if (response.statusCode < 400) {
+        return [true, _userDetails];
+      } else {
+        return [false, _userDetails];
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future verifyForgotpPasswordOtp(String mobileNumber, String otp) async {
+    try {
+      var url = Uri.parse(Api.checkOTP);
+      final response =
+      await http.post(url, body: {
+        "mobile": mobileNumber,
+        "otp": otp});
       var _userDetails = json.decode(response.body);
       if (response.statusCode < 400) {
         return [true, _userDetails];
