@@ -11,4 +11,5 @@ class Api {
   static const home = baseUrl + "home";
   static const resetpassword = baseUrl + "passwordotp";
   static const updatepassword = baseUrl + "passwordupdate";
+  static const addToCart = baseUrl + "addtocart";
 }

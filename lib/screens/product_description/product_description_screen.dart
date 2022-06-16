@@ -1,18 +1,51 @@
 import 'package:daily_kart/base/apis.dart';
 import 'package:daily_kart/models/newarrival.dart';
+import 'package:daily_kart/providers/cart_provider.dart';
 import 'package:daily_kart/screens/home/widgets/catergory_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:daily_kart/base/dimension.dart';
 import 'package:daily_kart/base/font_style.dart';
+import 'package:provider/provider.dart';
 
 import '../cart/cart_screen.dart';
 
-class ProductDescriptionScreen extends StatelessWidget {
+class ProductDescriptionScreen extends StatefulWidget {
   final Newarrival product;
-  const ProductDescriptionScreen({required this.product, Key? key})
-      : super(key: key);
+  ProductDescriptionScreen({required this.product, Key? key}) : super(key: key);
 
+  @override
+  State<ProductDescriptionScreen> createState() =>
+      _ProductDescriptionScreenState();
+}
+
+class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
+  bool _isloading = false;
+
+  Future _addItem(context, userid, productId, productCategory, productPrice,
+      mrp, productQty) async {
+    setState(() {
+      _isloading = true;
+    });
+
+    await Provider.of<CartProvider>(context, listen: false)
+        .addToCart(
+            userid, productId, productCategory, productPrice, mrp, productQty)
+        .then((value) {
+              setState(() {
+      _isloading = false;
+    });
+      if (value = true) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Add to Cart")));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("oops something went wrong")));
+      }
+    });
+  }
+
+  // void _showBottom(BuildContext context) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +62,7 @@ class ProductDescriptionScreen extends StatelessWidget {
                 Center(
                   child: FadeInImage.assetNetwork(
                     placeholder: "assets/images/logo_bw.png",
-                    image: Api.imageUrl + product.productImage,
+                    image: Api.imageUrl + widget.product.productImage,
                     imageErrorBuilder: (context, error, stackTrace) => Center(
                       child: Image.asset(
                         "assets/images/logo_bw.png",
@@ -47,7 +80,7 @@ class ProductDescriptionScreen extends StatelessWidget {
               height: 20,
             ),
             Text(
-              product.productName,
+              widget.product.productName,
               style: poppinsBold.copyWith(fontSize: Dimensions.fontSizeLarge),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -62,7 +95,7 @@ class ProductDescriptionScreen extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  product.productPrice[0].sp.toString(),
+                  widget.product.productPrice[0].sp.toString(),
                   style:
                       poppinsBold.copyWith(fontSize: Dimensions.fontSizeLarge),
                   maxLines: 2,
@@ -72,32 +105,49 @@ class ProductDescriptionScreen extends StatelessWidget {
             ),
             Divider(),
             Text(
-              product.description,
+              widget.product.description,
               style:
                   poppinsMedium.copyWith(fontSize: Dimensions.fontSizeDefault),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
             Text(
-              product.varientType,
+              widget.product.varientType,
               style:
                   poppinsMedium.copyWith(fontSize: Dimensions.fontSizeDefault),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
             Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const CartScreen()),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Add To Cart"),
-              ),
-            )
+            _isloading == true
+                ? Center(child: const CircularProgressIndicator())
+                : ElevatedButton(
+                    onPressed: () {
+                      _addItem(
+                          context,
+                          7143,
+                          widget.product.id,
+                          widget.product.categoryName,
+                          widget.product.productPrice[0].sp,
+                          widget.product.productPrice[0].originalprice,
+                          widget.product.productPrice[0].quantity);
+                      // Scaffold.of(context).showBottomSheet((context) {
+                      //   print("object");
+                      //   return Container(
+                      //     height: 300,
+                      //     color: Colors.amber,
+                      //   );
+                      // });
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => const CartScreen()),
+                      // );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Add To Cart"),
+                    ),
+                  )
           ],
         ),
       ),

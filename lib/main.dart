@@ -1,7 +1,7 @@
+import 'package:daily_kart/providers/cart_provider.dart';
 import 'package:daily_kart/providers/home_provider.dart';
 import 'package:daily_kart/providers/location.dart';
 import 'package:daily_kart/screens/register/login.dart';
-
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +46,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => HomeProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => CartProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -53,7 +56,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: colorCustomM,
         ),
-        home:  Login(),
+        home: Home(),
       ),
     );
   }
