@@ -23,25 +23,35 @@ class CartProvider with ChangeNotifier {
     print(productCategory.runtimeType);
     print(userid.runtimeType);
     print(productQty.runtimeType);
-    var data = {
-      // "productId": "2",
-      // "productCategory": "27",
-      // "productPrice": "500",
-      // "mrp": "650",
-      // "productQty": "1kG"
+    var data = [
+      {
+        // "productId": "2",
+        // "productCategory": "27",
+        // "productPrice": "500",
+        // "mrp": "650",
+        // "productQty": "1kG"
 
-      "productId": productId,
-      "prodcutCategory": productCategory,
-      "productPrice": productPrice,
-      "mrp": productPrice,
-      "productQty": productQty,
-    };
+        "productId": productId,
+        "prodcutCategory": productCategory,
+        "productQty": productQty,
+        "productPrice": productPrice,
+        "mrp": productPrice,
+      }
+    ];
+
+//    { [
+//     "productId":"1808",
+//     "productCategory":"1 pc",
+//     "productQty":"3",
+//     "productPrice":"21",
+//     "mrp":"22"
+// }]
 
     final url = Uri.parse((Api.addToCart));
 
     try {
-      print(data);
-      print("workinggggggggggggggggggggggggggggg");
+      print("Cart data $data");
+      print("working");
       final response = await http.post(url,
           body: {"userid": userid.toString(), "object": data.toString()});
 

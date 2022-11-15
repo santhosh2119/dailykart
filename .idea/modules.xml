@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/dailykart.iml" filepath="$PROJECT_DIR$/.idea/dailykart.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/dailykart_android.iml" filepath="$PROJECT_DIR$/android/dailykart_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Dailycart.iml" filepath="$PROJECT_DIR$/.idea/Dailycart.iml" />
     </modules>
   </component>
 </project>

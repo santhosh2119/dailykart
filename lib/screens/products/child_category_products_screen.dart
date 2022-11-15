@@ -23,8 +23,23 @@ class ChildCategoryProductsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Column(
-        children: [Text(catId), Text(subCatId), Text(childCatId)],
+      // body: Column(
+      //   children: [Text(catId), Text(subCatId), Text(childCatId)],
+      // ),
+      body: ListView.builder(
+        itemBuilder: (context, int index) {
+          return SingleChildScrollView(
+            child: InkWell(
+              child: Card(
+                  child: ListTile(
+                leading: Image.network(''),
+                title: Text(title),
+                subtitle: Text(subCatId),
+                trailing: Text(childCatId),
+              )),
+            ),
+          );
+        },
       ),
     );
   }

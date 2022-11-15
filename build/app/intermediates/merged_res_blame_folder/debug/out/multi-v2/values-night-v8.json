@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\dailykart (3)\\dailykart\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "C:\\All Files\\Projects\\Dailycart\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "F:\\dailykart (3)\\dailykart\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\All Files\\Projects\\Dailycart\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

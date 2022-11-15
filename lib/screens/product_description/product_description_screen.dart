@@ -32,15 +32,15 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
         .addToCart(
             userid, productId, productCategory, productPrice, mrp, productQty)
         .then((value) {
-              setState(() {
-      _isloading = false;
-    });
+      setState(() {
+        _isloading = false;
+      });
       if (value = true) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Add to Cart")));
+            .showSnackBar(const SnackBar(content: Text("Add to Cart")));
       } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("oops something went wrong")));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("oops something went wrong")));
       }
     });
   }
@@ -76,7 +76,7 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -103,7 +103,7 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
                 ),
               ],
             ),
-            Divider(),
+            const Divider(),
             Text(
               widget.product.description,
               style:
@@ -118,16 +118,17 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            Spacer(),
+            const Spacer(),
             _isloading == true
-                ? Center(child: const CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
                 : ElevatedButton(
                     onPressed: () {
+
                       _addItem(
                           context,
-                          7143,
+                          7140,
                           widget.product.id,
-                          widget.product.categoryName,
+                          widget.product.childCategoryName,
                           widget.product.productPrice[0].sp,
                           widget.product.productPrice[0].originalprice,
                           widget.product.productPrice[0].quantity);
@@ -143,8 +144,8 @@ class _ProductDescriptionScreenState extends State<ProductDescriptionScreen> {
                       //   MaterialPageRoute(builder: (context) => const CartScreen()),
                       // );
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Text("Add To Cart"),
                     ),
                   )

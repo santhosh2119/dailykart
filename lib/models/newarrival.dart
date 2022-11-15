@@ -145,7 +145,7 @@ class Newarrival {
             List<dynamic>.from(productPrice.map((x) => x.toJson())),
         "is_wishlist": isWishlist,
       };
-      @override
+  @override
   String toString() {
     return toJson().toString();
   }
@@ -189,7 +189,7 @@ class ProductPrice {
         "cartQty": cartQty,
         "discount_percentage": discountPercentage,
       };
-      @override
+  @override
   String toString() {
     return toJson().toString();
   }

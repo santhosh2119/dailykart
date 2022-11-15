@@ -2,6 +2,7 @@ import 'package:daily_kart/base/color_resources.dart';
 import 'package:daily_kart/base/dimension.dart';
 import 'package:daily_kart/base/font_style.dart';
 import 'package:daily_kart/providers/home_provider.dart';
+import 'package:daily_kart/screens/cart/cart_screen.dart';
 import 'package:daily_kart/screens/categories/all_categories_screen.dart';
 import 'package:daily_kart/screens/home/widgets/carousle.dart';
 import 'package:daily_kart/screens/home/widgets/catergory_view.dart';
@@ -16,7 +17,7 @@ class Home extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey();
   Home({Key? key}) : super(key: key);
   final GlobalKey<ScaffoldState> drawerGlobalKey = GlobalKey();
-// 
+//
   Future<void> _loadData(BuildContext context, bool reload) async {
     await Provider.of<HomeProvider>(context, listen: false)
         .getHome(context, false, "7140");
@@ -45,21 +46,22 @@ class Home extends StatelessWidget {
                   child: Image.asset("assets/images/logo.png"),
                 ),
               ),
-              CoustomDrawer(title: 'Profile', icon: Icon(Icons.person)),
-              CoustomDrawer(title: 'Cart', icon: Icon(Icons.shopping_cart)),
-              CoustomDrawer(
+              const CoustomDrawer(title: 'Profile', icon: Icon(Icons.person)),
+              const CoustomDrawer(
+                  title: 'Cart', icon: Icon(Icons.shopping_cart)),
+              const CoustomDrawer(
                   title: 'My Orders', icon: Icon(Icons.card_giftcard)),
-              CoustomDrawer(
+              const CoustomDrawer(
                 title: 'Offer',
                 icon: Icon(Icons.local_offer),
               ),
-              Divider(),
-              CoustomDrawer(
+              const Divider(),
+              const CoustomDrawer(
                 title: 'About Us',
                 icon: Icon(Icons.info),
               ),
-              CoustomDrawer(title: 'Contact Us', icon: Icon(Icons.phone)),
-              CoustomDrawer(
+              const CoustomDrawer(title: 'Contact Us', icon: Icon(Icons.phone)),
+              const CoustomDrawer(
                 title: 'LogOut',
                 icon: Icon(Icons.logout),
               ),
@@ -75,25 +77,27 @@ class Home extends StatelessWidget {
         title: const Text("Home"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CartScreen()));
+            },
             icon: const Icon(Icons.shopping_cart),
           ),
         ],
       ),
 
       body: SingleChildScrollView(
-      
         child: Container(
           // height: MediaQuery.of(context).size.height * 1,
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.all(6),
+                padding: const EdgeInsets.all(6),
                 color: Theme.of(context).primaryColor,
                 height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width,
                 child: Row(children: [
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: TextFormField(
                       onTap: () {
@@ -120,7 +124,7 @@ class Home extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.11,
                       child: IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.filter_list),
+                        icon: const Icon(Icons.filter_list),
                       ))
                 ]),
               ),
@@ -137,7 +141,7 @@ class Home extends StatelessWidget {
                 }),
               ),
               Container(
-                padding: EdgeInsets.all(6),
+                padding: const EdgeInsets.all(6),
                 color: Theme.of(context).primaryColor,
                 height: MediaQuery.of(context).size.height * 0.07,
                 width: MediaQuery.of(context).size.width,
@@ -145,8 +149,8 @@ class Home extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(Icons.category),
-                    SizedBox(
+                    const Icon(Icons.category),
+                    const SizedBox(
                       width: 16,
                     ),
                     Text(
@@ -166,7 +170,7 @@ class Home extends StatelessWidget {
                         : const CategoryScreen();
               }),
               Container(
-                padding: EdgeInsets.all(6),
+                padding: const EdgeInsets.all(6),
                 color: Theme.of(context).primaryColor,
                 height: MediaQuery.of(context).size.height * 0.07,
                 width: MediaQuery.of(context).size.width,
@@ -174,8 +178,8 @@ class Home extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(Icons.category),
-                    SizedBox(
+                    const Icon(Icons.category),
+                    const SizedBox(
                       width: 16,
                     ),
                     Text(
@@ -195,7 +199,7 @@ class Home extends StatelessWidget {
                         : const CoustomGrid();
               }),
               Container(
-                padding: EdgeInsets.all(6),
+                padding: const EdgeInsets.all(6),
                 color: Theme.of(context).primaryColor,
                 height: MediaQuery.of(context).size.height * 0.07,
                 width: MediaQuery.of(context).size.width,
@@ -203,8 +207,8 @@ class Home extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(Icons.category),
-                    SizedBox(
+                    const Icon(Icons.category),
+                    const SizedBox(
                       width: 16,
                     ),
                     Text(
